@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "XOGO-prod-API",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

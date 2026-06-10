@@ -1,0 +1,26 @@
+meta {
+  name: Get Dashboard Activity
+  type: http
+  seq: 13
+}
+
+get {
+  url: {{baseUrl}}/v2/api/dashboard/activity
+  body: none
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response is not empty", function() {
+    expect(res.getBody()).to.not.be.empty;
+  });
+}

@@ -1,0 +1,31 @@
+meta {
+  name: Approve On Team Enable
+  type: http
+  seq: 81
+}
+
+post {
+  url: {{baseUrl}}/v2/api/admin/members/approve-on-team-enable
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+body:json {
+  {}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response is not empty", function() {
+    expect(res.getBody()).to.not.be.empty;
+  });
+}

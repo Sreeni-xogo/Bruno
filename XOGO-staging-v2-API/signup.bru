@@ -1,0 +1,62 @@
+meta {
+  name: Signup
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/v2/api/users
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-api-version: {{x-api-version}}
+}
+
+body:json {
+  {
+    "email": "{{generatedEmail}}",
+    "firstName": "Bruno",
+    "lastName": "Test",
+    "title": "QA Tester",
+    "companyName": "company-bruno-{{generatedDate}}",
+    "hashedPassword": "{{hashedTestPassword}}",
+    "isEULAAccepted": true,
+    "resellerCode": "",
+    "referralCode": ""
+  }
+}
+
+script:pre-request {
+  // Unique email using timestamp - zero collision risk
+  const email = `brunotest.${Date.now()}@testmail.seventy`;
+  bru.setVar('generatedEmail', email);
+  bru.setEnvVar('userEmail', email);
+
+  // Company name date in DDMMYYYY format
+  const now = new Date();
+  const dd = String(now.getDate()).padStart(2, '0');
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const yyyy = now.getFullYear();
+  bru.setVar('generatedDate', `${dd}${mm}${yyyy}`);
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response has token", function() {
+    expect(res.getBody()).to.have.property('token');
+  });
+
+  test("Response has user object", function() {
+    expect(res.getBody()).to.have.property('user');
+  });
+
+  test("userEmail saved to env", function() {
+    expect(bru.getEnvVar('userEmail')).to.not.be.empty;
+  });
+}

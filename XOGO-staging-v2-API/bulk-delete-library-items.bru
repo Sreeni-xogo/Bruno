@@ -1,0 +1,22 @@
+meta {
+  name: Bulk Delete Library Items
+  type: http
+  seq: 23
+}
+
+delete {
+  url: {{baseUrl}}/v2/api/LibraryItems/bulkdelete
+  body: none
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

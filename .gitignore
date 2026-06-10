@@ -1,0 +1,13 @@
+# Bruno environment files contain credentials - never commit these
+**/environments/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Temp scripts
+C:/Temp/

@@ -1,0 +1,45 @@
+meta {
+  name: Get Player v4
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/v4/api/Players/{{playerId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-api-version: {{x-api-version}}
+  x-player-key: {{playerKey}}
+}
+
+body:json {
+  {
+    "playerHash": null,
+    "playlistHash": null,
+    "overlayHash": null,
+    "includeItems": true,
+    "coreXogoVersion": "1.1.1",
+    "nativeXogoVersion": "4.2.2",
+    "nativeOs": "Web",
+    "nativeOsVersion": "Windows 10"
+  }
+}
+
+vars:pre-request {
+  playerId: 35137153
+  playerKey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJQbGF5ZXJJZCI6IjM1MTM3MTUzIiwiZXhwIjoyMDk0NzM0NzY5LCJpc3MiOiJhcGkyLnhvZ28uaW8ifQ.Lol-eaxuW8Wka3iRyP6LvZcEB4TV8vtkxxyRZiuGopY
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Response has player data", function() {
+    expect(res.getBody()).to.not.be.empty;
+  });
+}

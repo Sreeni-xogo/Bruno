@@ -1,0 +1,22 @@
+meta {
+  name: Check Company Name
+  type: http
+  seq: 131
+}
+
+head {
+  url: {{baseUrl}}/v2/api/companies/{{companyName}}
+  body: none
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

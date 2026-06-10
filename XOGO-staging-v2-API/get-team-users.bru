@@ -1,0 +1,26 @@
+meta {
+  name: Get Team Users
+  type: http
+  seq: 61
+}
+
+get {
+  url: {{baseUrl}}/v2/api/admin/company-teams/{{teamId}}/team-users
+  body: none
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response is not empty", function() {
+    expect(res.getBody()).to.not.be.empty;
+  });
+}

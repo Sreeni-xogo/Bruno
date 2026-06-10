@@ -1,0 +1,66 @@
+meta {
+  name: Login
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/v2/api/users/login
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-api-version: {{x-api-version}}
+}
+
+body:json {
+  {
+    "email": "{{activeEmail}}",
+    "hashedPassword": "{{activeHashedPwd}}"
+  }
+}
+
+script:post-response {
+  const data = res.getBody();
+
+  if (res.getStatus() === 200) {
+    if (data.token) {
+      bru.setEnvVar('authToken', data.token);
+    }
+    if (data.user) {
+      bru.setEnvVar('userId', String(data.user.id));
+      bru.setEnvVar('userEmail', data.user.email);
+      if (data.user.defaultCompanyTeamId) {
+        bru.setEnvVar('companyTeamId', String(data.user.defaultCompanyTeamId));
+      }
+    }
+  }
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response has token", function() {
+    expect(res.getBody()).to.have.property('token');
+  });
+
+  test("Response has user object", function() {
+    expect(res.getBody()).to.have.property('user');
+  });
+
+  test("authToken saved to env", function() {
+    expect(bru.getEnvVar('authToken')).to.not.be.empty;
+  });
+
+  test("userId saved to env", function() {
+    expect(bru.getEnvVar('userId')).to.not.be.empty;
+  });
+
+  test("companyTeamId saved to env", function() {
+    expect(bru.getEnvVar('companyTeamId')).to.not.be.empty;
+  });
+}

@@ -1,0 +1,27 @@
+meta {
+  name: Export Master Group to CSV
+  type: http
+  seq: 148
+}
+
+get {
+  url: {{baseUrl}}/v3/api/admin/master-group/export-to-csv/{{masterGroupName}}
+  body: none
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response is not empty", function() {
+    expect(res.getBody()).to.not.be.empty;
+  });
+
+}

@@ -1,0 +1,22 @@
+meta {
+  name: Delete Player Group
+  type: http
+  seq: 58
+}
+
+delete {
+  url: {{baseUrl}}/v2/api/PlayerGroups/{{groupId}}
+  body: none
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

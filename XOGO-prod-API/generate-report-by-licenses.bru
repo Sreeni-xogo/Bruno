@@ -1,0 +1,33 @@
+meta {
+  name: Generate Report by Licenses
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/v3/api/admin/master-group/generate-report-by-licenses
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json-patch+json
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+body:json {
+  [
+    0
+  ]
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response is not empty", function() {
+    expect(res.getBody()).to.not.be.empty;
+  });
+}

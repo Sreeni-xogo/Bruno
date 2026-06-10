@@ -1,0 +1,22 @@
+meta {
+  name: Delete Key Value Tag
+  type: http
+  seq: 127
+}
+
+delete {
+  url: {{baseUrl}}/v2/api/Company/keyvaluetags/{{key}}
+  body: none
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}
