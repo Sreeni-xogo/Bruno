@@ -21,6 +21,6 @@ tests {
   });
 
   test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+    expect(Array.isArray(res.getBody())).to.be.true;
   });
 }

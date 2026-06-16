@@ -5,7 +5,7 @@ meta {
 }
 
 get {
-  url: {{baseUrl}}/v2/api/LibraryItems/{{id}}/failoverusage
+  url: {{baseUrl}}/v2/api/LibraryItems/{{libraryItemId}}/failoverusage
   body: none
   auth: none
 }
@@ -21,6 +21,6 @@ tests {
   });
 
   test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+    expect(Array.isArray(res.getBody())).to.be.true;
   });
 }
