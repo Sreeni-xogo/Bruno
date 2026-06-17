@@ -1,0 +1,22 @@
+meta {
+  name: Delete Account
+  type: http
+  seq: 156
+}
+
+delete {
+  url: {{baseUrl}}/v2/api/admin/accounts/delete
+  body: none
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

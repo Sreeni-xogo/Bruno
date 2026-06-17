@@ -1,0 +1,26 @@
+meta {
+  name: Get Key Value Tag
+  type: http
+  seq: 125
+}
+
+get {
+  url: {{baseUrl}}/v2/api/Company/keyvaluetags/{{key}}
+  body: none
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response is not empty", function() {
+    expect(res.getBody()).to.not.be.null;
+  });
+}

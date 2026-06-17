@@ -1,0 +1,31 @@
+meta {
+  name: Update Team User
+  type: http
+  seq: 87
+}
+
+post {
+  url: {{baseUrl}}/v2/api/admin/team-user/update-team-user
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+body:json {
+  {}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response is not empty", function() {
+    expect(res.getBody()).to.not.be.empty;
+  });
+}

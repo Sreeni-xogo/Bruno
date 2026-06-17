@@ -17,14 +17,14 @@ headers {
 
 body:json {
   {
-    "email": "{{activeEmail}}",
-    "hashedPassword": "{{activeHashedPwd}}"
+    "email": "{{user2Email}}",
+    "hashedPassword": "{{user2HashedPwd}}"
   }
 }
 
 script:post-response {
   const data = res.getBody();
-
+  
   if (res.getStatus() === 200) {
     if (data.token) {
       bru.setEnvVar('authToken', data.token);
@@ -43,23 +43,23 @@ tests {
   test("Status is 200", function() {
     expect(res.getStatus()).to.equal(200);
   });
-
+  
   test("Response has token", function() {
     expect(res.getBody()).to.have.property('token');
   });
-
+  
   test("Response has user object", function() {
     expect(res.getBody()).to.have.property('user');
   });
-
+  
   test("authToken saved to env", function() {
     expect(bru.getEnvVar('authToken')).to.not.be.empty;
   });
-
+  
   test("userId saved to env", function() {
     expect(bru.getEnvVar('userId')).to.not.be.empty;
   });
-
+  
   test("companyTeamId saved to env", function() {
     expect(bru.getEnvVar('companyTeamId')).to.not.be.empty;
   });

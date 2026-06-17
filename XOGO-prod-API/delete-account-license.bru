@@ -1,0 +1,22 @@
+meta {
+  name: Delete Account License
+  type: http
+  seq: 103
+}
+
+delete {
+  url: {{baseUrl}}/v2/api/admin/account/licenses/{{billingCycle}}/{{licenseQuantity}}
+  body: none
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

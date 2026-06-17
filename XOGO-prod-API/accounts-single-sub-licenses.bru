@@ -1,0 +1,26 @@
+meta {
+  name: Get Accounts Single Sub Licenses
+  type: http
+  seq: 94
+}
+
+get {
+  url: {{baseUrl}}/v2/api/admin/accounts/single-subscription/licenses
+  body: none
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response is not empty", function() {
+    expect(res.getBody()).to.not.be.empty;
+  });
+}

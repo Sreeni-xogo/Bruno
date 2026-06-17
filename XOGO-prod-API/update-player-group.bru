@@ -1,0 +1,31 @@
+meta {
+  name: Update Player Group
+  type: http
+  seq: 56
+}
+
+put {
+  url: {{baseUrl}}/v2/api/PlayerGroups
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+body:json {
+  {}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response is not empty", function() {
+    expect(res.getBody()).to.not.be.empty;
+  });
+}

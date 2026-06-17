@@ -1,0 +1,39 @@
+meta {
+  name: Create Widget
+  type: http
+  seq: 37
+}
+
+post {
+  url: {{baseUrl}}/v2/api/Widgets
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+body:json {
+  {
+    "name": "Clock-mcp-test",
+    "libraryItemType": "WidgetClock",
+    "tags": [],
+    "notes": "",
+    "isOverlayVisible": true,
+    "assetUrl": "https://widgets-staging.xogo.io/clock?timezone=India+Standard+Time&theme.fontColor=%23FFFFFF&theme.foregroundColor=dark&theme.fontStyle=modern&theme.backgroundColor=%23404040",
+    "metadata": {}
+  }
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response is not empty", function() {
+    expect(res.getBody()).to.not.be.empty;
+  });
+}

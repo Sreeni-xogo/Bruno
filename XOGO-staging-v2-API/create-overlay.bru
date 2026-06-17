@@ -1,0 +1,48 @@
+meta {
+  name: Create Overlay
+  type: http
+  seq: 35
+}
+
+post {
+  url: {{baseUrl}}/v2/api/Overlays
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+body:json {
+  {
+    "name": "test-mcp",
+    "horizontalPixels": 1920,
+    "verticalPixels": 1080,
+    "items": [
+      {
+        "name": "https://widgets-staging.xogo.io/weather?location=Doha&timezone=Asia/Qatar&celsius=1",
+        "url": "https://widgets-staging.xogo.io/weather?location=Doha&timezone=Asia/Qatar&celsius=1",
+        "top": 231,
+        "left": 708,
+        "height": 576,
+        "width": 677,
+        "refreshInterval": 60,
+        "type": "web-surface",
+        "libraryItemId": {{libraryItemId}}
+      }
+    ]
+  }
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response is not empty", function() {
+    expect(res.getBody()).to.not.be.empty;
+  });
+}
