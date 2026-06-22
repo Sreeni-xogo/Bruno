@@ -1,7 +1,7 @@
 meta {
   name: Get Player
   type: http
-  seq: 5
+  seq: 6
 }
 
 get {
@@ -20,7 +20,7 @@ tests {
     expect(res.getStatus()).to.equal(200);
   });
 
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+  test("Response is a player ID", function() {
+    expect(res.getBody()).to.be.a('number');
   });
 }

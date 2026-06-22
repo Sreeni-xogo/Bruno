@@ -1,0 +1,35 @@
+meta {
+  name: Login
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/v2/api/users/login
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-api-version: {{x-api-version}}
+}
+
+body:json {
+  {
+    "email": "{{user1Email}}",
+    "hashedPassword": "{{user1HashedPwd}}"
+  }
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("authToken saved to env", function() {
+    const data = res.getBody();
+    expect(data).to.have.property('token');
+    bru.setEnvVar('authToken', data.token);
+  });
+}
