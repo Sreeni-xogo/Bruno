@@ -1,0 +1,28 @@
+meta {
+  name: Licenses
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/v2/api/Licenses
+  body: none
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("licenseId saved to env", function() {
+    const data = res.getBody();
+    expect(data).to.be.an('array').that.is.not.empty;
+    bru.setEnvVar('licenseId', data[0].licenseId);
+  });
+}

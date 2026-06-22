@@ -1,0 +1,50 @@
+meta {
+  name: Add Player
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/v2/api/Players/{{playerId}}
+  body: json
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+body:json {
+  {
+    "name": "player-name",
+    "notes": "player creation from bruno",
+    "scheduledDownloadEnabled": false,
+    "offlineCachingEnabled": false,
+    "isPlaybackSyncEnabled": false,
+    "associatedPlaylistId": null,
+    "displayOrientationId": 1,
+    "scheduledDownloadStartTime": "0",
+    "scheduledDownloadEndTime": "0",
+    "rebootMinute": 0,
+    "necDevices": [],
+    "associatedOverlayId": null,
+    "timeZone": {
+      "id": "India Standard Time",
+      "displayName": "(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi",
+      "iana": "Asia/Kolkata"
+    },
+    "isAnimationEnabled": false,
+    "licenseId": {{licenseId}}
+  }
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("Response is not empty", function() {
+    expect(res.getBody()).to.not.be.empty;
+  });
+}

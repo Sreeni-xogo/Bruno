@@ -1,0 +1,50 @@
+meta {
+  name: Player Create
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/v2/api/players
+  body: json
+  auth: none
+}
+
+headers {
+  x-api-version: {{x-api-version}}
+  x-manager-key: {{authToken}}
+}
+
+body:json {
+  {
+    "$id": "1",
+    "appVersion": "1.0.178",
+    "deviceModel": "Unknown",
+    "appType": "WebPlayer",
+    "osVersion": "Windows 10"
+  }
+}
+
+tests {
+  test("Status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+
+  test("playerToken saved to env", function() {
+    const data = res.getBody();
+    expect(data).to.have.property('playerToken');
+    bru.setEnvVar('playerToken', data.playerToken);
+  });
+
+  test("playerPIN saved to env", function() {
+    const data = res.getBody();
+    expect(data).to.have.property('playerPIN');
+    bru.setEnvVar('playerPIN', data.playerPIN);
+  });
+
+  test("playerId saved to env", function() {
+    const data = res.getBody();
+    expect(data).to.have.property('playerId');
+    bru.setEnvVar('playerId', data.playerId);
+  });
+}
