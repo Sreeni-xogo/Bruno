@@ -1,11 +1,11 @@
 meta {
-  name: Delete Library Item
+  name: Delete Playlist
   type: http
-  seq: 23
+  seq: 160
 }
 
 delete {
-  url: {{baseUrl}}/v2/api/LibraryItems?id={{crudLibraryItemId}}
+  url: {{baseUrl}}/v2/api/Playlists?id={{crudPlaylistId}}
   body: none
   auth: none
 }

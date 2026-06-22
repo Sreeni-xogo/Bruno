@@ -1,11 +1,11 @@
 meta {
-  name: Create Widget
+  name: Create Widget (Clock)
   type: http
   seq: 37
 }
 
 post {
-  url: {{baseUrl}}/v2/api/Widgets
+  url: {{baseUrl}}/v2/api/LibraryItems
   body: json
   auth: none
 }
@@ -18,13 +18,12 @@ headers {
 
 body:json {
   {
-    "name": "Clock-mcp-test",
+    "name": "crud-clock-widget",
     "libraryItemType": "WidgetClock",
-    "tags": [],
-    "notes": "",
+    "assetUrl": "https://widgets-staging.xogo.io/clock?timezone=Asia%2FKolkata",
     "isOverlayVisible": true,
-    "assetUrl": "https://widgets-staging.xogo.io/clock?timezone=India+Standard+Time&theme.fontColor=%23FFFFFF&theme.foregroundColor=dark&theme.fontStyle=modern&theme.backgroundColor=%23404040",
-    "metadata": {}
+    "tags": [],
+    "notes": ""
   }
 }
 
@@ -33,7 +32,9 @@ tests {
     expect(res.getStatus()).to.equal(200);
   });
 
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+  test("Response has id", function() {
+    const body = res.getBody();
+    expect(body).to.have.property('id');
+    bru.setEnvVar('crudWidgetId', body.id);
   });
 }

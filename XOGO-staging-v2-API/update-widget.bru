@@ -1,11 +1,11 @@
 meta {
-  name: Update Widget
+  name: Update Widget (Clock)
   type: http
   seq: 38
 }
 
 put {
-  url: {{baseUrl}}/v2/api/Widgets/{{id}}
+  url: {{baseUrl}}/v2/api/LibraryItems
   body: json
   auth: none
 }
@@ -18,12 +18,13 @@ headers {
 
 body:json {
   {
-    "name": "Clock-mcp-test-editing",
-    "tags": [],
-    "notes": "",
+    "id": {{crudWidgetId}},
+    "name": "crud-clock-widget-updated",
+    "libraryItemType": "WidgetClock",
+    "assetUrl": "https://widgets-staging.xogo.io/clock?timezone=Asia%2FKolkata",
     "isOverlayVisible": true,
-    "assetUrl": "https://widgets-staging.xogo.io/clock?timezone=India+Standard+Time&theme.fontColor=%23FFFFFF&theme.foregroundColor=dark&theme.fontStyle=modern&theme.backgroundColor=%23404040",
-    "metadata": {}
+    "tags": [],
+    "notes": "updated"
   }
 }
 

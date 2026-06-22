@@ -18,7 +18,7 @@ headers {
 
 body:json {
   {
-    "name": "mcp-testing",
+    "name": "mcp-crud-planner",
     "events": [
       {
         "childPlaylistId": {{playlistId}},
@@ -36,6 +36,8 @@ tests {
   });
 
   test("Response is a planner ID", function() {
-    expect(res.getBody()).to.be.a('number');
+    const id = res.getBody();
+    expect(id).to.be.a('number');
+    bru.setEnvVar('crudPlannerId', id);
   });
 }

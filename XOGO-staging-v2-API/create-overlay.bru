@@ -18,20 +18,19 @@ headers {
 
 body:json {
   {
-    "name": "test-mcp",
+    "name": "crud-overlay-test",
     "horizontalPixels": 1920,
     "verticalPixels": 1080,
     "items": [
       {
-        "name": "https://widgets-staging.xogo.io/weather?location=Doha&timezone=Asia/Qatar&celsius=1",
-        "url": "https://widgets-staging.xogo.io/weather?location=Doha&timezone=Asia/Qatar&celsius=1",
-        "top": 231,
-        "left": 708,
-        "height": 576,
-        "width": 677,
+        "name": "huntersreeni-web",
+        "url": "https://huntersreeni.web.app",
+        "top": 0,
+        "left": 0,
+        "height": 1080,
+        "width": 1920,
         "refreshInterval": 60,
-        "type": "web-surface",
-        "libraryItemId": {{libraryItemId}}
+        "type": "web-surface"
       }
     ]
   }
@@ -42,7 +41,9 @@ tests {
     expect(res.getStatus()).to.equal(200);
   });
 
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+  test("Response has id", function() {
+    const body = res.getBody();
+    expect(body).to.have.property('id');
+    bru.setEnvVar('crudOverlayId', body.id);
   });
 }

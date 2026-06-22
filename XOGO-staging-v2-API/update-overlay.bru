@@ -5,7 +5,7 @@ meta {
 }
 
 put {
-  url: {{baseUrl}}/v2/api/Overlays/{{overlayId}}
+  url: {{baseUrl}}/v2/api/Overlays
   body: json
   auth: none
 }
@@ -18,22 +18,20 @@ headers {
 
 body:json {
   {
-    "id": {{overlayId}},
-    "name": "test-mcp-edited",
+    "id": {{crudOverlayId}},
+    "name": "crud-overlay-test-updated",
     "horizontalPixels": 1920,
     "verticalPixels": 1080,
-    "companyTeamId": {{companyTeamId}},
     "items": [
       {
-        "name": "https://widgets-staging.xogo.io/weather?location=Doha&timezone=Asia/Qatar&celsius=1",
-        "url": "https://widgets-staging.xogo.io/weather?location=Doha&timezone=Asia/Qatar&celsius=1",
-        "top": 231,
-        "left": 708,
-        "height": 576,
-        "width": 677,
+        "name": "huntersreeni-web-updated",
+        "url": "https://huntersreeni.web.app",
+        "top": 0,
+        "left": 0,
+        "height": 1080,
+        "width": 1920,
         "refreshInterval": 60,
-        "type": "web-surface",
-        "libraryItemId": {{libraryItemId}}
+        "type": "web-surface"
       }
     ]
   }

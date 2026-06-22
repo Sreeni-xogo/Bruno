@@ -1,11 +1,11 @@
 meta {
-  name: Upload Asset
+  name: Create Library Item (URL)
   type: http
   seq: 20
 }
 
 post {
-  url: {{baseUrl}}/v2/api/assets
+  url: {{baseUrl}}/v2/api/LibraryItems
   body: json
   auth: none
 }
@@ -18,20 +18,12 @@ headers {
 
 body:json {
   {
-    "name": "Batman-2.png",
-    "assetUrl": "https://xogostaging.blob.core.windows.net/assets/75851699-672f-4b6f-8c2b-970e5fda77d1",
+    "name": "crud-url-item",
+    "assetUrl": "https://huntersreeni.web.app",
     "isOverlayVisible": true,
-    "libraryItemType": "Image",
-    "thumbnailUrl": "https://xogostaging.blob.core.windows.net/assets/910a7bba-3452-4853-8b80-de39e4c4e48f",
+    "libraryItemType": "Url",
     "tags": [],
-    "notes": "",
-    "companyTeamId": {{companyTeamId}},
-    "metadata": {
-      "width": 1920,
-      "height": 1080,
-      "format": "png",
-      "fileSize": 5209158
-    }
+    "notes": ""
   }
 }
 
@@ -40,7 +32,9 @@ tests {
     expect(res.getStatus()).to.equal(200);
   });
 
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+  test("Response has id", function() {
+    const body = res.getBody();
+    expect(body).to.have.property('id');
+    bru.setEnvVar('crudLibraryItemId', body.id);
   });
 }

@@ -1,10 +1,10 @@
 meta {
-  name: Update Playlist
+  name: Create Playlist
   type: http
-  seq: 159
+  seq: 158
 }
 
-put {
+post {
   url: {{baseUrl}}/v2/api/Playlists
   body: json
   auth: none
@@ -18,8 +18,7 @@ headers {
 
 body:json {
   {
-    "id": {{crudPlaylistId}},
-    "name": "crud-playlist-updated",
+    "name": "crud-playlist-test",
     "hasDeadZone": false,
     "items": [
       {
@@ -51,7 +50,9 @@ tests {
     expect(res.getStatus()).to.equal(200);
   });
 
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+  test("Response has id", function() {
+    const body = res.getBody();
+    expect(body).to.have.property('id');
+    bru.setEnvVar('crudPlaylistId', body.id);
   });
 }
