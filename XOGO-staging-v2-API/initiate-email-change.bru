@@ -5,19 +5,21 @@ meta {
 }
 
 post {
-  url: {{baseUrl}}/v2/api/UserEmailValidation/InitiateEmailChange
-  body: json
+  url: {{baseUrl}}/v2/api/UserEmailValidation/InitiateEmailChange?newEmail=ss%2Bemailchangetest%40xogo.io
+  body: none
   auth: none
 }
 
 headers {
-  Content-Type: application/json
   x-api-version: {{x-api-version}}
   x-manager-key: {{authToken}}
 }
 
-body:json {
-  {}
+script:post-response {
+  const data = res.getBody();
+  if (res.getStatus() === 200 && data && data.token) {
+    bru.setEnvVar('emailChangeToken', data.token);
+  }
 }
 
 tests {

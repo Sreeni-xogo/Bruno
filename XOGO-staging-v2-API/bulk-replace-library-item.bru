@@ -17,7 +17,11 @@ headers {
 }
 
 body:json {
-  {}
+  {
+    "oldLibraryItemId": {{bulkReplaceOldItemId}},
+    "newLibraryItemId": {{bulkReplaceNewItemId}},
+    "companyTeamId": {{companyTeamId}}
+  }
 }
 
 tests {

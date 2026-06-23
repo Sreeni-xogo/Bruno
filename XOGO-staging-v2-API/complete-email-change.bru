@@ -5,19 +5,14 @@ meta {
 }
 
 post {
-  url: {{baseUrl}}/v2/api/UserEmailValidation/CompleteEmailChange
-  body: json
+  url: {{baseUrl}}/v2/api/UserEmailValidation/CompleteEmailChange?token={{emailChangeToken}}
+  body: none
   auth: none
 }
 
 headers {
-  Content-Type: application/json
   x-api-version: {{x-api-version}}
   x-manager-key: {{authToken}}
-}
-
-body:json {
-  {}
 }
 
 tests {

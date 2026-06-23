@@ -5,19 +5,14 @@ meta {
 }
 
 post {
-  url: {{baseUrl}}/v2/api/UserEmailValidation/sendCode
-  body: json
+  url: {{baseUrl}}/v2/api/UserEmailValidation/sendCode?email={{user2Email}}
+  body: none
   auth: none
 }
 
 headers {
-  Content-Type: application/json
   x-api-version: {{x-api-version}}
   x-manager-key: {{authToken}}
-}
-
-body:json {
-  {}
 }
 
 tests {
