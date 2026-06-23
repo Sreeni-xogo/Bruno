@@ -17,15 +17,26 @@ headers {
 }
 
 body:json {
-  {}
+  {
+    "provider": "OpenAI",
+    "apiKey": "sk-test-crud-key-xogo"
+  }
+}
+
+script:post-response {
+  const data = res.getBody();
+  if ((res.getStatus() === 200 || res.getStatus() === 201) && data && data.id) {
+    bru.setEnvVar('crudAiIntegrationId', data.id);
+  }
 }
 
 tests {
-  test("Status is 200", function() {
-    expect(res.getStatus()).to.equal(200);
+  test("Status is 201", function() {
+    expect(res.getStatus()).to.equal(201);
   });
 
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+  test("Response has id", function() {
+    const body = res.getBody();
+    expect(body).to.have.property('id');
   });
 }

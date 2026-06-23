@@ -5,19 +5,14 @@ meta {
 }
 
 post {
-  url: {{baseUrl}}/v2/api/company/teams/{{companyTeamId}}/playlist
-  body: json
+  url: {{baseUrl}}/v2/api/company/teams/{{companyTeamId}}/playlist?playlistId={{playlistId}}
+  body: none
   auth: none
 }
 
 headers {
-  Content-Type: application/json
   x-api-version: {{x-api-version}}
   x-manager-key: {{authToken}}
-}
-
-body:json {
-  {}
 }
 
 tests {

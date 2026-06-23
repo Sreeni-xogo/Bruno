@@ -6,18 +6,13 @@ meta {
 
 post {
   url: {{baseUrl}}/v2/api/admin/members/reject/{{id}}
-  body: json
+  body: none
   auth: none
 }
 
 headers {
-  Content-Type: application/json
   x-api-version: {{x-api-version}}
   x-manager-key: {{authToken}}
-}
-
-body:json {
-  {}
 }
 
 tests {

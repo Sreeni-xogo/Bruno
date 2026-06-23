@@ -5,7 +5,7 @@ meta {
 }
 
 get {
-  url: {{baseUrl}}/v2/api/Players/{{id}}/GetTags
+  url: {{baseUrl}}/v2/api/Players/{{playerId}}/GetTags
   body: none
   auth: none
 }
@@ -20,7 +20,8 @@ tests {
     expect(res.getStatus()).to.equal(200);
   });
 
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+  test("Response is an object", function() {
+    const body = res.getBody();
+    expect(typeof body).to.equal('object');
   });
 }

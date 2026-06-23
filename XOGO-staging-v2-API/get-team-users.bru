@@ -5,7 +5,7 @@ meta {
 }
 
 get {
-  url: {{baseUrl}}/v2/api/admin/company-teams/{{teamId}}/team-users
+  url: {{baseUrl}}/v2/api/admin/company-teams/{{companyTeamId}}/team-users
   body: none
   auth: none
 }
@@ -20,7 +20,7 @@ tests {
     expect(res.getStatus()).to.equal(200);
   });
 
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+  test("Response is an array", function() {
+    expect(Array.isArray(res.getBody())).to.be.true;
   });
 }

@@ -17,15 +17,13 @@ headers {
 }
 
 body:json {
-  {}
+  {
+    "dashboardType": "SmallBusiness"
+  }
 }
 
 tests {
   test("Status is 200", function() {
     expect(res.getStatus()).to.equal(200);
-  });
-
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
   });
 }

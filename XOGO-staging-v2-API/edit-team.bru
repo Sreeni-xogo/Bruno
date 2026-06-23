@@ -17,7 +17,11 @@ headers {
 }
 
 body:json {
-  {}
+  {
+    "teamId": {{crudTeamId}},
+    "name": "crud-team-updated",
+    "companyTeamId": {{companyTeamId}}
+  }
 }
 
 tests {

@@ -5,7 +5,7 @@ meta {
 }
 
 put {
-  url: {{baseUrl}}/v2/api/Players/{{id}}
+  url: {{baseUrl}}/v2/api/Players/{{playerId}}
   body: json
   auth: none
 }
@@ -20,9 +20,6 @@ body:json {
   {
     "name": "mcp-testing-edited",
     "notes": "",
-    "associatedPlaylistId": {{playlistId}},
-    "associatedOverlayId": {{overlayId}},
-    "licenseId": 7586,
     "displayOrientationId": 1,
     "offlineCachingEnabled": true,
     "scheduledDownloadEnabled": false,

@@ -18,24 +18,17 @@ headers {
 
 body:json {
   {
-    "plannerId": 9478,
-    "name": "mcp-testing-editing",
-    "events": [
-      {
-        "childPlaylistId": {{playlistId}},
-        "startDate": null,
-        "endDate": null,
-        "incrementTypeId": 0,
-        "playlistPlannerEventId": 15987
-      },
-      {
-        "childPlaylistId": 9231,
-        "startDate": "2026-06-20T00:00:00.000+05:30",
-        "endDate": "2026-06-20T23:59:59.999+05:30",
-        "incrementTypeId": 0
-      }
-    ],
-    "deletedEventIds": [15991, 15990]
+    "playlistPlannerEventId": 0,
+    "parentPlaylistId": {{crudPlannerId}},
+    "childPlaylistId": {{playlistId}},
+    "incrementTypeId": 0
+  }
+}
+
+script:post-response {
+  const data = res.getBody();
+  if (res.getStatus() === 200 && data && data.playlistPlannerEventId) {
+    bru.setEnvVar('crudPlannerEventId', data.playlistPlannerEventId);
   }
 }
 
@@ -44,7 +37,8 @@ tests {
     expect(res.getStatus()).to.equal(200);
   });
 
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+  test("Response has playlistPlannerEventId", function() {
+    const body = res.getBody();
+    expect(body).to.have.property('playlistPlannerEventId');
   });
 }

@@ -17,7 +17,16 @@ headers {
 }
 
 body:json {
-  {}
+  {
+    "name": "crud-team-test"
+  }
+}
+
+script:post-response {
+  const data = res.getBody();
+  if (res.getStatus() === 200 && data && data.id) {
+    bru.setEnvVar('crudTeamId', data.id);
+  }
 }
 
 tests {
@@ -25,7 +34,8 @@ tests {
     expect(res.getStatus()).to.equal(200);
   });
 
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+  test("Response has id", function() {
+    const body = res.getBody();
+    expect(body).to.have.property('id');
   });
 }

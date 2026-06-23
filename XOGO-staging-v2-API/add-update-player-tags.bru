@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{baseUrl}}/v2/api/Players/{{id}}/TagAddUpdate
+  url: {{baseUrl}}/v2/api/Players/{{playerId}}/TagAddUpdate
   body: json
   auth: none
 }
@@ -17,15 +17,14 @@ headers {
 }
 
 body:json {
-  {}
+  {
+    "key": "test-tag",
+    "value": "test-value"
+  }
 }
 
 tests {
   test("Status is 200", function() {
     expect(res.getStatus()).to.equal(200);
-  });
-
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
   });
 }

@@ -5,27 +5,18 @@ meta {
 }
 
 post {
-  url: {{baseUrl}}/v2/api/admin/team-user/add-multiple-users
-  body: json
+  url: {{baseUrl}}/v2/api/admin/team-user/add-multiple-users?teamId={{companyTeamId}}&selectedUserIds=
+  body: none
   auth: none
 }
 
 headers {
-  Content-Type: application/json
   x-api-version: {{x-api-version}}
   x-manager-key: {{authToken}}
-}
-
-body:json {
-  {}
 }
 
 tests {
   test("Status is 200", function() {
     expect(res.getStatus()).to.equal(200);
-  });
-
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
   });
 }

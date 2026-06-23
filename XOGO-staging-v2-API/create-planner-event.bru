@@ -18,10 +18,7 @@ headers {
 
 body:json {
   {
-    "childPlaylistId": {{playlistId}},
-    "startDate": "2026-06-20T00:00:00.000+05:30",
-    "endDate": "2026-06-20T23:59:59.999+05:30",
-    "incrementTypeId": 0
+    "parentPlaylistId": {{crudPlannerId}}
   }
 }
 
@@ -30,7 +27,7 @@ tests {
     expect(res.getStatus()).to.equal(200);
   });
 
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
+  test("Response is an array", function() {
+    expect(Array.isArray(res.getBody())).to.be.true;
   });
 }

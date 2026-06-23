@@ -6,26 +6,17 @@ meta {
 
 post {
   url: {{baseUrl}}/v2/api/Players/{{id}}/Checkin
-  body: json
+  body: none
   auth: none
 }
 
 headers {
-  Content-Type: application/json
   x-api-version: {{x-api-version}}
   x-manager-key: {{authToken}}
 }
 
-body:json {
-  {}
-}
-
 tests {
   test("Status is 200", function() {
-    expect(res.getStatus()).to.equal(200);
-  });
-
-  test("Status is 200 (no response body)", function() {
     expect(res.getStatus()).to.equal(200);
   });
 }

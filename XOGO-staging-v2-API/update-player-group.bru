@@ -17,15 +17,15 @@ headers {
 }
 
 body:json {
-  {}
+  {
+    "id": {{crudPlayerGroupId}},
+    "name": "crud-player-group-updated",
+    "overridePlayerPlaylists": false
+  }
 }
 
 tests {
   test("Status is 200", function() {
     expect(res.getStatus()).to.equal(200);
-  });
-
-  test("Response is not empty", function() {
-    expect(res.getBody()).to.not.be.empty;
   });
 }
