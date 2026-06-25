@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{baseUrl}}/v2/api/Playlists/Planner/Event
+  url: {{baseUrl}}/v2/api/Playlists/Planner/Event/AddUpdate
   body: json
   auth: none
 }
@@ -18,7 +18,10 @@ headers {
 
 body:json {
   {
-    "parentPlaylistId": {{crudPlannerId}}
+    "playlistPlannerEventId": 0,
+    "parentPlaylistId": {{crudPlannerId}},
+    "childPlaylistId": {{playlistId}},
+    "incrementTypeId": 0
   }
 }
 
@@ -27,7 +30,8 @@ tests {
     expect(res.getStatus()).to.equal(200);
   });
 
-  test("Response is an array", function() {
-    expect(Array.isArray(res.getBody())).to.be.true;
+  test("Response has playlistPlannerEventId", function() {
+    const body = res.getBody();
+    expect(body).to.have.property('playlistPlannerEventId');
   });
 }

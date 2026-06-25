@@ -23,4 +23,13 @@ tests {
   test("Response is not empty", function() {
     expect(res.getBody()).to.not.be.empty;
   });
+
+  test("Capture existing CRUD planner ID for cleanup", function() {
+    const planners = res.getBody();
+    if (!Array.isArray(planners)) return;
+    const existing = planners.find(function(p) { return p && p.name === 'mcp-crud-planner'; });
+    if (existing && existing.playlistId) {
+      bru.setEnvVar('crudPlannerId', existing.playlistId);
+    }
+  });
 }

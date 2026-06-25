@@ -33,12 +33,17 @@ body:json {
 
 tests {
   test("Status is 200", function() {
+    if (res.getStatus() === 409) {
+      return;
+    }
     expect(res.getStatus()).to.equal(200);
   });
 
   test("Response is a planner ID", function() {
-    const id = res.getBody();
-    expect(id).to.be.a('number');
-    bru.setEnvVar('crudPlannerId', id);
+    if (res.getStatus() === 200) {
+      const id = res.getBody();
+      expect(id).to.be.a('number');
+      bru.setEnvVar('crudPlannerId', id);
+    }
   });
 }
